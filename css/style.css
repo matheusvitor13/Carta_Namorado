@@ -1,4 +1,4 @@
-:root {
+ :root {
             --primary: #fff;
             --bg-color: rgb(151, 103, 190);
             --bg-envelope-color: #f5edd1;
@@ -21,21 +21,21 @@
             height: 100vh;
             display: grid;
             place-items: center;
-            /* Adicione perspectiva ao container */
-            perspective: 1000px; /* Um valor entre 500px e 1000px geralmente funciona bem */
+            /* Adiciona perspectiva ao container para criar a ilusão de profundidade */
+            perspective: 1000px; 
         }
-        .container > .envelope-wrapper {
+        .envelope-wrapper {
             background: var(--bg-envelope-color);
             box-shadow: 0 0 40px var(--shadow-color);
         }
-        .envelope-wrapper > .envelope {
+        .envelope {
             position: relative;
             width: 300px;
             height: 230px;
-            /* Garanta que as transformações 3D se comportem corretamente */
+            /* Garante que as transformações 3D se comportem corretamente dentro do envelope */
             transform-style: preserve-3d;
         }
-        .envelope-wrapper > .envelope::before {
+        .envelope::before {
             content: "";
             position: absolute;
             top: 0;
@@ -46,7 +46,7 @@
             transform-origin: top;
             transition: all 0.5s ease-in-out 0.7s;
         }
-        .envelope-wrapper > .envelope::after {
+        .envelope::after {
             content: "";
             position: absolute;
             z-index: 2;
@@ -83,7 +83,8 @@
             height: 15px;
             background: var(--heart-color);
             z-index: 4;
-            transform: translate(-50%, -20%) rotate(45deg);
+            /* Ajusta a transformação inicial do coração */
+            transform: translate(-50%, -20%) rotate(45deg); 
             transition: transform 0.5s ease-in-out 1s;
             box-shadow: 0 1px 6px var(--shadow-color);
             cursor: pointer;
@@ -103,17 +104,21 @@
         .heart:after {
             right: 7.5px;
         }
-        .flap > .envelope:before {
+
+        /* --- */
+        /* Efeitos quando o envelope é aberto */
+        /* --- */
+        .flap > .envelope::before {
             transform: rotateX(180deg);
             z-index: 0;
         }
         .flap > .envelope > .letter {
-            bottom: 150px; /* Ajuste este valor se precisar */
-            /* Adicione translateZ para a carta vir para frente */
-            transform: scale(1.5) translateZ(100px); /* 100px é um exemplo, ajuste conforme necessário */
+            bottom: 150px; /* Move para cima */
+            transform: scale(1.5) translateZ(100px); /* Aumenta e avança no eixo Z */
             transition-delay: 1s;
         }
         .flap > .heart {
-            transform: rotate(90deg);
+            /* Move para trás no eixo Z com um valor negativo */
+            transform: translate(-50%, -20%) rotate(45deg) translateZ(-50px); /* Ajuste este valor */
             transition-delay: 0.4s;
         }
